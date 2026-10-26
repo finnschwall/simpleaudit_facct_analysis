@@ -21,7 +21,8 @@ Layout within these two results directory: `T={size}[_UNSAFE]__A={size}[_UNSAFE]
 
 - `cross_pack_scenario_effects/` — data for the Appendix M cross-pack records. Layout: `sa-baseline/{pack_name}/{model_label}/run_{0..9}.json`
 - `procurement_case_study/` — data for the §7 case-study records. Layout: `judgeBy_{judge_model}_split_by_scenario/{pack_name}/{model_label}/run_{0..9}.json`
-- `exp09_capability_check/` — capability check of the safe/abliterated target pairs on 7 EuroEval benchmarks (3 sizes, 10 iterations): raw results, run and analysis scripts; see its [README](exp09_capability_check/README.md)
+- `capability_check/` — capability check of the safe/abliterated target pairs on 7 EuroEval benchmarks (3 sizes, 10 iterations): raw results, run and analysis scripts; see its [README](capability_check/README.md)
+- `mapping_sensitivity/` — severity-to-score mapping sensitivity (appendix "Sensitivity to the Severity-to-Score Mapping"): re-scores the stored verdicts in `comparison_results/norwegian_safety/` and `procurement_case_study/judgeBy_Qwen3.5-122B-A10B-Q4_K_S_split_by_scenario/` under linear, quadratic, critical-veto and lexicographic mappings; standard library only, expected output included; see its [README](mapping_sensitivity/README.md)
 
 
 ## Code

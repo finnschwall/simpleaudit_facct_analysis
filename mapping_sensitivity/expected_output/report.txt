@@ -1,0 +1,98 @@
+== Part 1: validation sweep (reliable cells J, A in {M, L}; ERROR policy: zero) ==
+ERROR verdicts in the analyzed runs: 5
+ J  A   T      n         Linear      Quadratic  Critical veto  Lexicographic  no-critical runs safe/abl
+ M  L  XS 10/10           0.890          0.890          0.500          0.910   0/10  0/10
+ M  L   S 10/10           0.905          0.780          0.550          1.000   1/10  0/10
+ M  L   M 10/10           0.995          0.950          0.700          1.000   4/10  0/10
+ M  M  XS 10/10           0.970          0.935          0.500          0.980   0/10  0/10
+ M  M   S 10/10           0.995          0.990          0.600          1.000   2/10  0/10
+ M  M   M 10/10           1.000          1.000          0.800          1.000   6/10  0/10
+ L  L  XS 10/10           1.000          1.000          0.500          1.000   0/10  0/10
+ L  L   S 10/10           0.980          0.925          0.500          1.000   0/10  0/10
+ L  L   M 10/10           1.000          0.980          0.600          1.000   2/10  0/10
+ L  M  XS 10/10           0.955          0.950          0.500          0.970   0/10  0/10
+ L  M   S 10/10           1.000          1.000          0.550          1.000   1/10  0/10
+ L  M   M 10/10           1.000          1.000          0.800          1.000   6/10  0/10
+AUROC range Linear       : 0.890 - 1.000
+AUROC range Quadratic    : 0.780 - 1.000
+AUROC range Critical veto: 0.500 - 0.800
+AUROC range Lexicographic: 0.910 - 1.000
+AUROC range critical count alone (diagnostic): 0.900 - 1.000  LLM=1.000 LLS=1.000 LLXS=1.000 LMM=0.995 LMS=1.000 LMXS=0.970 MLM=1.000 MLS=0.985 MLXS=0.900 MMM=1.000 MMS=1.000 MMXS=0.965
+
+Target-level ordering (six levels; mean run score, lexicographic: lower-median run) vs linear, Kendall tau-b:
+  J=L A=L  Quadratic 1.000  Critical veto 0.577  Lexicographic 1.000
+      Linear        M > S > M_U > XS > S_U > XS_U
+      Quadratic     M > S > M_U > XS > S_U > XS_U
+      Critical veto M > M_U = S_U = S = XS_U = XS
+      Lexicographic M > S > M_U > XS > S_U > XS_U
+  J=L A=M  Quadratic 0.966  Critical veto 0.802  Lexicographic 0.966
+      Linear        M > S > M_U = XS > S_U > XS_U
+      Quadratic     M > S > XS > M_U > S_U > XS_U
+      Critical veto M > S > M_U = S_U = XS_U = XS
+      Lexicographic M > S > M_U > XS > S_U > XS_U
+  J=M A=L  Quadratic 0.867  Critical veto 0.775  Lexicographic 0.867
+      Linear        M > S > M_U > XS > S_U > XS_U
+      Quadratic     M > S > M_U > S_U > XS > XS_U
+      Critical veto M > S > M_U = S_U = XS_U = XS
+      Lexicographic M > S > XS > M_U > S_U > XS_U
+  J=M A=M  Quadratic 1.000  Critical veto 0.775  Lexicographic 0.867
+      Linear        M > S > M_U > XS > S_U > XS_U
+      Quadratic     M > S > M_U > XS > S_U > XS_U
+      Critical veto M > S > M_U = S_U = XS_U = XS
+      Lexicographic M > S > XS > M_U > S_U > XS_U
+
+CHECK linear AUROC vs published grid: 12/12 cells reproduce
+
+== Part 2: Borealis - Gemma case study (Judge L; ERROR policy: zero) ==
+ERROR verdicts in the analyzed runs: 3
+Deltas are Borealis minus Gemma in pp; Overall pools the 36 scenarios of each run.
+'*' = every run of both models contains a critical verdict, so both scores are 0.
+Size Mapping                Overall     Healthcare       Language  Public Sector         Safety
+1b   Linear                  +0.76          +2.50          -1.25          -0.25          +1.88 
+1b   Quadratic               +0.33          +1.00          -0.16          -0.06          +0.47 
+1b   Critical veto           +0.00*         +0.00*         +0.00*         +0.00*         +0.00*
+1b   dCR (all)               -2.50          -7.00          +3.75          +1.00          -7.50 
+4b   Linear                 +14.17         +24.00          +4.06         +15.25         +10.62 
+4b   Quadratic              +10.42         +20.75          +2.11         +10.81          +5.31 
+4b   Critical veto           +0.00*         +0.00*         +3.12          +0.00*         +0.00*
+4b   dCR (all)              -23.89         -30.00          -7.50         -27.00         -28.75 
+12b  Linear                  +7.01          +9.50          -0.94         +10.25          +7.81 
+12b  Quadratic               +6.75          +9.25          -1.17         +10.81          +6.48 
+12b  Critical veto           +0.00*         +5.25         -15.94          +0.00*         -5.94 
+12b  dCR (all)               -4.72          -5.00          +2.50          -7.00          -8.75 
+27b  Linear                  +6.04          +8.25          +1.56          +8.25          +5.00 
+27b  Quadratic               +5.26          +7.69          +2.11          +6.94          +3.28 
+27b  Critical veto           +0.00*         -4.25          -3.12          +3.25         +10.94 
+27b  dCR (all)               -7.50          -9.00          +3.75         -12.00         -11.25 
+
+Runs with no critical verdict (Borealis/Gemma, of n):
+  1b          Overall: 0/0     Healthcare: 0/0       Language: 0/0  Public Sector: 0/0         Safety: 0/0
+  4b          Overall: 0/0     Healthcare: 0/0       Language: 2/1  Public Sector: 0/0         Safety: 0/0
+  12b         Overall: 0/0     Healthcare: 1/0       Language: 3/6  Public Sector: 0/0         Safety: 0/2
+  27b         Overall: 0/0     Healthcare: 0/1       Language: 6/7  Public Sector: 2/1         Safety: 2/0
+
+Sign flips vs linear (|delta| >= 0.05 on both sides):
+  12b Safety Critical veto: +7.81 -> -5.94
+  27b Healthcare Critical veto: +8.25 -> -4.25
+  27b Language Critical veto: +1.56 -> -3.12
+Nonzero linear delta that becomes zero:
+  1b Overall Critical veto: +0.76 -> +0.00
+  1b Healthcare Critical veto: +2.50 -> +0.00
+  1b Language Critical veto: -1.25 -> +0.00
+  1b Public Sector Critical veto: -0.25 -> +0.00
+  1b Safety Critical veto: +1.88 -> +0.00
+  4b Overall Critical veto: +14.17 -> +0.00
+  4b Healthcare Critical veto: +24.00 -> +0.00
+  4b Public Sector Critical veto: +15.25 -> +0.00
+  4b Safety Critical veto: +10.62 -> +0.00
+  12b Overall Critical veto: +7.01 -> +0.00
+  12b Public Sector Critical veto: +10.25 -> +0.00
+  27b Overall Critical veto: +6.04 -> +0.00
+Quadratic cells whose magnitude grows rather than shrinks:
+  12b Language: -0.94 -> -1.17
+  12b Public Sector: +10.25 -> +10.81
+  27b Language: +1.56 -> +2.11
+
+CHECK linear deltas and dCR vs published delta table: 20/20 cells reproduce at one decimal
+
+LaTeX tables written to expected_output/tables.tex
