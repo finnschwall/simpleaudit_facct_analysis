@@ -1,6 +1,6 @@
 Analysis code for
 
-_When No Benchmark Exists: Validating Comparative LLM Safety Scoring Without Ground-Truth Labels_
+Who Decides What Counts as Safe? Measurement and Responsibility in Benchmarkless LLM Audits
 
 ## Notebooks
 
