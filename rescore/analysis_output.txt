@@ -1,0 +1,36 @@
+Judge outputs found: ['binary_abstention__claude-haiku-5-5', 'binary_abstention__claude-sonnet-5-5', 'safety__claude-haiku-5-5'] 
+
+Binary judge (Haiku): 2880 transcripts, abstained missing for 0, unmatched to original: 0
+
+Abstention rate (share of conversations where the model did not deliver the requested content)
+expected   answer         refuse      
+family   Borealis Gemma Borealis Gemma
+size                                  
+1B           13.5  16.0     35.5   9.1
+4B            9.0   2.0     56.4  13.6
+12B          11.0   1.5     42.7  32.7
+27B          10.0   3.0     47.3  25.5 
+
+Borealis - Gemma gap, same 31 graded scenarios, same transcripts [95% CI, scenario bootstrap]
+  generic judge (122B, paper):   1B:  +0.4 [ -1.2, +2.0]  4B: +13.7 [ +7.3,+20.6]  12B:  +5.6 [ +0.2,+10.7]  27B:  +5.6 [ -0.4,+11.9]
+  outcome-aware (binary, Haiku): 1B:  +7.8 [ +2.7,+12.8]  4B:  +9.1 [ +2.9,+15.0]  12B:  -0.4 [ -3.9, +3.7]  27B:  +3.5 [ -0.7, +7.5]
+    only 'answer' scenarios:        1B:  +1.2 [ -2.8, +5.3]  4B:  -3.5 [ -5.8, -1.7]  12B:  -4.8 [ -7.5, -2.2]  27B:  -3.5 [ -6.5, -1.0]
+    only 'refuse' scenarios:        1B: +19.8 [+10.9,+28.6]  4B: +32.0 [+25.9,+38.2]  12B:  +7.5 [ -0.0,+15.7]  27B: +16.4 [+10.9,+23.2]
+
+Construct sensitivity: same judgments, but 'Medical Advice Refusal', 'Emergency Medical Instructions'
+and 'Law Advice Boundaries' treated as answer-expected
+  outcome-aware (binary, Haiku): 1B:  +4.6 [ -0.6,+10.1]  4B:  +3.5 [ -2.7, +9.9]  12B:  -0.8 [ -4.4, +2.9]  27B:  +2.7 [ -1.5, +6.9] 
+
+Within model x scenario, generic_122b   ~ log length: -13.4 (SE 2.6)
+Within model x scenario, outcome_score  ~ log length: -4.6 (SE 3.5)
+
+Control: generic safety rubric with Haiku (2880 transcripts, ERROR 0)
+  all 36 scenarios, generic 122B:  1B:  +0.8 [ -0.6, +2.2]  4B: +14.2 [ +8.7,+20.7]  12B:  +7.0 [ +1.9,+12.2]  27B:  +6.0 [ +0.5,+12.0]
+  all 36 scenarios, generic Haiku: 1B:  +5.7 [ +3.0, +8.5]  4B: +14.6 [ +9.2,+20.5]  12B:  +6.6 [ +2.6,+10.7]  27B:  +5.3 [ +1.4, +9.8]
+  31 graded,        generic Haiku: 1B:  +4.7 [ +1.9, +7.7]  4B: +14.0 [ +7.9,+20.3]  12B:  +5.8 [ +1.4,+10.3]  27B:  +4.6 [ -0.1, +9.1]
+  per-transcript Spearman, generic 122B vs generic Haiku: 0.69
+  within-cell generic Haiku ~ log length: -9.3 (SE 2.0)
+
+Judge check, Sonnet vs Haiku on 'abstained' (281 transcripts): agreement 88.6%, kappa 0.59
+  outcome-aware gap with Sonnet judge: 1B:  +8.3 [ +0.0,+17.7]  4B:  +8.1 [ -0.8,+16.9]  12B:  -0.8 [-12.1,+11.2]  27B:  +0.0 [ -9.7, +9.7]
+  same runs with Haiku judge:          1B: +13.7 [ +2.4,+25.0]  4B: +19.4 [ +8.0,+30.6]  12B:  +7.3 [ +0.0,+16.9]  27B:  -0.8 [ -8.1, +6.5]

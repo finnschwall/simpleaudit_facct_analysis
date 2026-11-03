@@ -1,0 +1,125 @@
+== Data ==
+validation cells used: 15; conversations (each once): 1200; runs: 150
+transcript-equality check (SHA-256 of scenario name, description and conversation, per run x scenario position): 54/54 judge files identical to the first judge file of their cell (an assertion stops the run otherwise); judge dirs skipped for lacking experiment_results.json: ['T=XS__A=L/J=S']
+LLM run records used (cell x judge x run): 540; ERROR verdicts in them: 5
+case-study conversations: 3024 (84 model-runs, 4 packs); ERROR verdicts: 3
+conversations with zero target turns (score NaN, excluded): validation 0, case 0
+word list: 29 entries, 55 distinct strings (en+nb), 29 distinct en strings
+
+== Q1: AUROC safe vs abliterated (runs) ==
+CHECK LLM-judge AUROC vs published grid: 12/12 cells reproduce at 3 decimals
+  J=L                A=M  T=XS AUROC=0.955 [0.860, 1.000] published=0.955
+  J=L                A=M  T=S  AUROC=1.000 [1.000, 1.000] published=1.0
+  J=L                A=M  T=M  AUROC=1.000 [1.000, 1.000] published=1.0
+  J=L                A=L  T=XS AUROC=1.000 [1.000, 1.000] published=1.0
+  J=L                A=L  T=S  AUROC=0.980 [0.920, 1.000] published=0.98
+  J=L                A=L  T=M  AUROC=1.000 [1.000, 1.000] published=1.0
+  J=M                A=M  T=XS AUROC=0.970 [0.895, 1.000] published=0.97
+  J=M                A=M  T=S  AUROC=0.995 [0.970, 1.000] published=0.995
+  J=M                A=M  T=M  AUROC=1.000 [1.000, 1.000] published=1.0
+  J=M                A=L  T=XS AUROC=0.890 [0.715, 1.000] published=0.89
+  J=M                A=L  T=S  AUROC=0.905 [0.740, 1.000] published=0.905
+  J=M                A=L  T=M  AUROC=0.995 [0.970, 1.000] published=0.995
+  length             A=M  T=XS AUROC=1.000 [1.000, 1.000] match=True fail=False
+  length             A=M  T=S  AUROC=0.160 [0.000, 0.380] match=False fail=True
+  length             A=M  T=M  AUROC=0.940 [0.820, 1.000] match=False fail=False
+  length             A=L  T=XS AUROC=0.740 [0.480, 0.940] match=False fail=True
+  length             A=L  T=S  AUROC=0.420 [0.170, 0.720] match=False fail=True
+  length             A=L  T=M  AUROC=0.910 [0.740, 1.000] match=False fail=False
+  keyword            A=M  T=XS AUROC=1.000 [1.000, 1.000] match=True fail=False
+  keyword            A=M  T=S  AUROC=1.000 [1.000, 1.000] match=True fail=False
+  keyword            A=M  T=M  AUROC=1.000 [1.000, 1.000] match=True fail=False
+  keyword            A=L  T=XS AUROC=1.000 [1.000, 1.000] match=True fail=False
+  keyword            A=L  T=S  AUROC=1.000 [1.000, 1.000] match=True fail=False
+  keyword            A=L  T=M  AUROC=0.995 [0.970, 1.000] match=False fail=False
+  keyword_en_only    A=M  T=XS AUROC=0.500 [0.350, 0.650] match=False fail=True
+  keyword_en_only    A=M  T=S  AUROC=0.700 [0.550, 0.850] match=False fail=False
+  keyword_en_only    A=M  T=M  AUROC=0.450 [0.350, 0.500] match=False fail=True
+  keyword_en_only    A=L  T=XS AUROC=0.500 [0.500, 0.500] match=False fail=True
+  keyword_en_only    A=L  T=S  AUROC=0.500 [0.500, 0.500] match=False fail=True
+  keyword_en_only    A=L  T=M  AUROC=0.500 [0.500, 0.500] match=False fail=True
+  keyword_prefix     A=M  T=XS AUROC=0.540 [0.280, 0.785] match=False fail=True
+  keyword_prefix     A=M  T=S  AUROC=0.285 [0.090, 0.520] match=False fail=True
+  keyword_prefix     A=M  T=M  AUROC=0.740 [0.485, 0.950] match=False fail=True
+  keyword_prefix     A=L  T=XS AUROC=0.440 [0.220, 0.690] match=False fail=True
+  keyword_prefix     A=L  T=S  AUROC=0.435 [0.220, 0.670] match=False fail=True
+  keyword_prefix     A=L  T=M  AUROC=0.635 [0.410, 0.855] match=False fail=True
+  keyword_last_turn  A=M  T=XS AUROC=0.875 [0.695, 0.990] match=True fail=False
+  keyword_last_turn  A=M  T=S  AUROC=0.950 [0.845, 1.000] match=False fail=False
+  keyword_last_turn  A=M  T=M  AUROC=0.985 [0.940, 1.000] match=False fail=False
+  keyword_last_turn  A=L  T=XS AUROC=0.970 [0.910, 1.000] match=False fail=False
+  keyword_last_turn  A=L  T=S  AUROC=0.985 [0.940, 1.000] match=True fail=False
+  keyword_last_turn  A=L  T=M  AUROC=1.000 [1.000, 1.000] match=True fail=False
+  length: match 1/6, fail 3/6
+  keyword: match 5/6, fail 0/6
+  keyword_en_only: match 0/6, fail 5/6
+  keyword_prefix: match 0/6, fail 6/6
+  keyword_last_turn: match 3/6, fail 0/6
+
+== Q2: pair agreement with reference ==
+  S1                length           ref=L            pairs= 32629 agree=0.597 [0.564, 0.631] no-ties=0.597 ties=0.000
+  S1                keyword          ref=L            pairs= 32629 agree=0.650 [0.619, 0.679] no-ties=0.706 ties=0.270
+  S1                keyword_en_only  ref=L            pairs= 32629 agree=0.505 [0.500, 0.510] no-ties=0.735 ties=0.981
+  S2                length           ref=XL           pairs= 18322 agree=0.679 [0.641, 0.713] no-ties=0.679 ties=0.000
+  S2                keyword          ref=XL           pairs= 18322 agree=0.549 [0.516, 0.580] no-ties=0.567 ties=0.272
+  S2                keyword_en_only  ref=XL           pairs= 18322 agree=0.499 [0.491, 0.506] no-ties=0.457 ties=0.968
+  S2-r              length           ref=XL           pairs= 11744 agree=0.754 [0.702, 0.796] no-ties=0.754 ties=0.000
+  S2-r              keyword          ref=XL           pairs= 11744 agree=0.591 [0.552, 0.631] no-ties=0.623 ties=0.255
+  S2-r              keyword_en_only  ref=XL           pairs= 11744 agree=0.497 [0.485, 0.508] no-ties=0.431 ties=0.956
+  S2-s              length           ref=XL           pairs=  6578 agree=0.547 [0.482, 0.610] no-ties=0.547 ties=0.000
+  S2-s              keyword          ref=XL           pairs=  6578 agree=0.473 [0.419, 0.531] no-ties=0.461 ties=0.303
+  S2-s              keyword_en_only  ref=XL           pairs=  6578 agree=0.502 [0.496, 0.509] no-ties=0.636 ties=0.988
+  S2-L              length           ref=L            pairs= 20186 agree=0.622 [0.589, 0.654] no-ties=0.622 ties=0.000
+  S2-L              keyword          ref=L            pairs= 20186 agree=0.563 [0.530, 0.599] no-ties=0.587 ties=0.278
+  S2-L              keyword_en_only  ref=L            pairs= 20186 agree=0.496 [0.489, 0.504] no-ties=0.398 ties=0.965
+  S3-safety         length           ref=case judge L pairs= 15959 agree=0.596 [0.519, 0.666] no-ties=0.596 ties=0.000
+  S3-safety         keyword          ref=case judge L pairs= 15959 agree=0.465 [0.421, 0.509] no-ties=0.449 ties=0.299
+  S3-safety         keyword_en_only  ref=case judge L pairs= 15959 agree=0.503 [0.498, 0.509] no-ties=0.753 ties=0.989
+  S3-public_sector  length           ref=case judge L pairs= 20213 agree=0.605 [0.524, 0.681] no-ties=0.605 ties=0.000
+  S3-public_sector  keyword          ref=case judge L pairs= 20213 agree=0.419 [0.372, 0.466] no-ties=0.398 ties=0.206
+  S3-public_sector  keyword_en_only  ref=case judge L pairs= 20213 agree=0.502 [0.498, 0.507] no-ties=0.652 ties=0.987
+  S3-healthcare     length           ref=case judge L pairs= 21487 agree=0.586 [0.515, 0.646] no-ties=0.586 ties=0.000
+  S3-healthcare     keyword          ref=case judge L pairs= 21487 agree=0.416 [0.376, 0.456] no-ties=0.392 ties=0.225
+  S3-healthcare     keyword_en_only  ref=case judge L pairs= 21487 agree=0.501 [0.500, 0.505] no-ties=1.000 ties=0.997
+  S3-c-language     length           ref=case judge L pairs= 18577 agree=0.539 [0.480, 0.598] no-ties=0.539 ties=0.000
+  S3-c-language     keyword          ref=case judge L pairs= 18577 agree=0.370 [0.331, 0.413] no-ties=0.294 ties=0.369
+  S3-c-language     keyword_en_only  ref=case judge L pairs= 18577 agree=0.499 [0.498, 0.500] no-ties=0.227 ties=0.998
+
+== Q2 ladder (targets S, M; A in M, L, XL; reference J=XL) ==
+ pair set per_instrument: 480 conversations
+  length           pairs=  8277 agree=0.673 [0.630, 0.713] no-ties=0.673 ties=0.000
+  keyword          pairs=  8277 agree=0.549 [0.510, 0.584] no-ties=0.567 ties=0.273
+  keyword_en_only  pairs=  8277 agree=0.504 [0.497, 0.512] no-ties=0.674 ties=0.977
+  J=XS             pairs=  8277 agree=0.705 [0.669, 0.737] no-ties=0.892 ties=0.478
+  J=S              pairs=  8277 agree=0.727 [0.691, 0.761] no-ties=0.849 ties=0.350
+  J=M              pairs=  8226 agree=0.773 [0.743, 0.801] no-ties=0.881 ties=0.284
+  J=L              pairs=  8229 agree=0.786 [0.752, 0.818] no-ties=0.888 ties=0.263
+ pair set common_no_error: 478 conversations
+  length           pairs=  8178 agree=0.673 [0.629, 0.713] no-ties=0.673 ties=0.000
+  keyword          pairs=  8178 agree=0.547 [0.508, 0.583] no-ties=0.565 ties=0.272
+  keyword_en_only  pairs=  8178 agree=0.504 [0.497, 0.512] no-ties=0.672 ties=0.977
+  J=XS             pairs=  8178 agree=0.706 [0.669, 0.739] no-ties=0.893 ties=0.475
+  J=S              pairs=  8178 agree=0.727 [0.691, 0.760] no-ties=0.850 ties=0.351
+  J=M              pairs=  8178 agree=0.772 [0.742, 0.801] no-ties=0.880 ties=0.285
+  J=L              pairs=  8178 agree=0.785 [0.752, 0.818] no-ties=0.887 ties=0.264
+
+== Q3: partial eta^2, score ~ C(target) + C(auditor), Type II ==
+  length     n=120 eta2_target=0.392 eta2_auditor=0.146
+  keyword    n=120 eta2_target=0.820 eta2_auditor=0.341
+  J=L        n=120 eta2_target=0.884 eta2_auditor=0.184
+  J=M        n=120 eta2_target=0.798 eta2_auditor=0.126
+
+== Case study: Borealis - Gemma deltas ==
+CHECK Judge-L deltas vs published table: 20/20 reproduce at one decimal
+  length: sign match 17/20; in CI-excludes-0 subset 10/10
+  keyword: sign match 3/20; in CI-excludes-0 subset 0/10
+  keyword_en_only: sign match 7/20; in CI-excludes-0 subset 6/10
+  keyword_prefix: sign match 14/20; in CI-excludes-0 subset 9/10
+  keyword_last_turn: sign match 4/20; in CI-excludes-0 subset 0/10
+
+== Robustness of the keyword judge ==
+  primary            Q1 match 5/6 fail 0/6; S2 0.549 [0.516, 0.580]; S2-s 0.473; S3-safety 0.465; eta2 target 0.820 auditor 0.341
+  keyword_en_only    Q1 match 0/6 fail 5/6; S2 0.499 [0.491, 0.506]; S2-s 0.502; S3-safety 0.503; eta2 target 0.097 auditor 0.062
+  keyword_prefix     Q1 match 0/6 fail 6/6; S2 0.535 [0.504, 0.565]; S2-s 0.518; S3-safety 0.507; eta2 target 0.089 auditor 0.625
+  keyword_last_turn  Q1 match 3/6 fail 0/6; S2 0.535 [0.511, 0.560]; S2-s 0.464; S3-safety 0.462; eta2 target 0.680 auditor 0.000
+  leave-one-phrase-out (29 entries), min-max: q1_n_match 2.000-6.000; q1_n_fail 0.000-1.000; S2_agreement 0.523-0.566; S2-s_agreement 0.455-0.515; S3-safety_agreement 0.445-0.509; eta2_target 0.558-0.871; eta2_auditor 0.007-0.422

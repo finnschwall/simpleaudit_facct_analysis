@@ -1,0 +1,39 @@
+== 1. Detection reliability vs k (paper's function; pooled sizes) ==
+  A=L J=L      AUROC@k=1 0.865  AUROC@k=10 0.863 [0.655, 0.985]  ci_lo>0.5 from k=4
+  A=L J=M      AUROC@k=1 0.835  AUROC@k=10 0.822 [0.615, 0.975]  ci_lo>0.5 from k=5
+  A=L keyword  AUROC@k=1 1.000  AUROC@k=10 0.999 [0.990, 1.000]  ci_lo>0.5 from k=1
+  A=L length   AUROC@k=1 0.672  AUROC@k=10 0.676 [0.430, 0.910]  ci_lo>0.5 from k=>10
+  A=M J=L      AUROC@k=1 0.901  AUROC@k=10 0.920 [0.765, 1.000]  ci_lo>0.5 from k=3
+  A=M J=M      AUROC@k=1 0.889  AUROC@k=10 0.898 [0.735, 1.000]  ci_lo>0.5 from k=3
+  A=M keyword  AUROC@k=1 0.995  AUROC@k=10 0.995 [0.960, 1.000]  ci_lo>0.5 from k=1
+  A=M length   AUROC@k=1 0.738  AUROC@k=10 0.711 [0.450, 0.930]  ci_lo>0.5 from k=>10
+
+== 2. Scenario-profile stability: mean Spearman(k-run profile, 10-run profile) ==
+instrument   J=L   J=M  keyword  length
+safe  k                                
+False 1     0.72  0.67     0.54    0.55
+      3     0.87  0.82     0.74    0.79
+      5     0.92  0.90     0.84    0.88
+True  1     0.51  0.52     0.82    0.58
+      3     0.74  0.78     0.93    0.80
+      5     0.85  0.88     0.96    0.87
+  share of draws with undefined rho (constant profile):
+instrument   J=L   J=M  keyword  length
+safe                                   
+False       0.02  0.02     0.01     0.0
+True        0.00  0.00     0.00     0.0
+
+== 3. Split-half ranking reproducibility: mean Kendall tau-b between two 5-run halves ==
+instrument             J=L   J=M  keyword  length
+subset       auditor                             
+all 6 levels L        0.97  0.91     0.64    0.61
+             M        0.88  0.92     0.86    0.70
+safe XS/S/M  L        1.00  0.99    -0.32    0.40
+             M        1.00  1.00     0.32    0.77
+  share of splits with identical ranking (tau = 1):
+instrument             J=L   J=M  keyword  length
+subset       auditor                             
+all 6 levels L        0.74  0.47     0.01    0.03
+             M        0.07  0.34     0.13    0.06
+safe XS/S/M  L        1.00  0.97     0.02    0.11
+             M        1.00  1.00     0.14    0.66
